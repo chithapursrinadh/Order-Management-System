@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="order_managementModel1StoreContainer" CdmEntityContainer="OrdersModelEntities">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="order_managementModel1.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="order_managementModel1.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+          <ScalarProperty Name="orderStatuscode" ColumnName="orderStatuscode" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="order_managementModel1.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="height" ColumnName="height" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="sku" ColumnName="sku" />
+          <ScalarProperty Name="barcode" ColumnName="barcode" />
+          <ScalarProperty Name="AvailQuantities" ColumnName="AvailQuantities" />
+          <ScalarProperty Name="RequiredQuant" ColumnName="RequiredQuant" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getOrderDetails" FunctionName="order_managementModel1.Store.getOrderDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="order_managementModel1.getOrderDetails_Result">
+          <ScalarProperty Name="Product_Name" ColumnName="Product Name" />
+          <ScalarProperty Name="Shipping_Address" ColumnName="Shipping Address" />
+          <ScalarProperty Name="Status_Code" ColumnName="Status Code" />
+          <ScalarProperty Name="Required_Quantities" ColumnName="Required Quantities" />
+          <ScalarProperty Name="Order_Id" ColumnName="Order Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertOrder" FunctionName="order_managementModel1.Store.InsertOrder" />
+  </EntityContainerMapping>
+</Mapping>

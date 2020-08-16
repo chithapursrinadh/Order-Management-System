@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="order_managementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="OrderId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OrderStatusId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="CustomerId" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Orders__ProductI__3B75D760" FromRole="Orders" ToRole="Products" />
+    <NavigationProperty Name="OrderStatu" Relationship="Self.FK_statusId" FromRole="Orders" ToRole="OrderStatus" />
+  </EntityType>
+  <EntityType Name="OrderStatu">
+    <Key>
+      <PropertyRef Name="OrderStatusId" />
+    </Key>
+    <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
+    <Property Name="OrderStatusName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_statusId" FromRole="OrderStatus" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="weight" Type="Int32" />
+    <Property Name="height" Type="Int32" />
+    <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="sku" Type="Int32" />
+    <Property Name="barcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AvailQuantities" Type="Int32" />
+    <Property Name="RequiredQuant" Type="Int32" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ProductI__3B75D760" FromRole="Products" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK__Orders__ProductI__3B75D760">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_statusId">
+    <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="OrderStatusId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="OrderStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OrderManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <AssociationSet Name="FK__Orders__ProductI__3B75D760" Association="Self.FK__Orders__ProductI__3B75D760">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_statusId" Association="Self.FK_statusId">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <FunctionImport Name="GetCustomerItems" ReturnType="Collection(order_managementModel.GetCustomerItems_Result)">
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+      <Parameter Name="userRoleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetCustomerItems_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="weight" Nullable="true" />
+    <Property Type="Int32" Name="height" Nullable="true" />
+    <Property Type="Binary" Name="photo" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="sku" Nullable="true" />
+    <Property Type="String" Name="barcode" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="AvailQuantities" Nullable="true" />
+    <Property Type="Int32" Name="RequiredQuant" Nullable="true" />
+  </ComplexType>
+</Schema>
