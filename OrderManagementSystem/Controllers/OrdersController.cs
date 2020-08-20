@@ -17,23 +17,15 @@ namespace OrderManagementSystem.Controllers
            dbContext= new OrdersModelEntities();
         }
         [HttpGet]
-        public HttpResponseMessage GetOrders(int userRoleId,int id=1)
+        public HttpResponseMessage LoadAllOrders(int userRoleId,int id=1)
         {
             try
             {
                 if(userRoleId <= 2)
                 {
                     var model = dbContext.getOrderDetails(id, userRoleId);
-                    var i = model.OrderByDescending(x => x.Order_Id).Select(x => x.Order_Id);
-                    if (Convert.ToInt32(i)<=id)
-                    {
-                        return Request.CreateResponse(HttpStatusCode.OK,model );
-                    }
-                    else
-                    {
-                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Given id=" + id + " id not found");
-                    }
-                  //  return Request.CreateResponse(HttpStatusCode.OK, model);
+                   
+                   return Request.CreateResponse(HttpStatusCode.OK, model);
                 }
                
                 else
@@ -52,9 +44,10 @@ namespace OrderManagementSystem.Controllers
         {
             try
             {
-                dbContext.Orders.Add(order);
-                dbContext.SaveChanges();
-                ResponseMail.SendMail(order.OrderId);
+                dbContext.Orders.Add(order);         
+                dbContext.SaveChangesAsync();
+              //  ResponseMail.SendMail(order.OrderId);  after giving the details for fromMail and ToMail, uncomment it
+
                 return Request.CreateResponse(HttpStatusCode.OK, order);
             }
             catch(Exception ex)

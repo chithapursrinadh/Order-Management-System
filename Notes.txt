@@ -1,1 +1,18 @@
-1) Worked on Asp.net web Api entity framework ( DataBase First Approach).
+1) Used Entity framework (DataBase First Approach).
+2) Didn't included Async and await.
+3) Created Trigger for Order table, when new order placed then for that new order it will update as "Placed" because intially the order should be Placed.
+4) Didn't worked on Multiple orderItems for Single order, don't have idea, for multiple orderItems we can send through json array for ProductId, but Properties and methods in Entity framework no idea.
+5) Didn't worked on authentication, instead of that, created UserRole table and inserted values as 
+	i)  1 for User, 
+	ii) 2 for Admin
+While retrieving the values by using the userRole, appropriate values get fetch.
+6) Created Tables relations as of my knowledge because we had backend team who can do those operations, so i checked few things and worked on that.
+7) Tested in PostMan.
+8) If the method name starts with Http Verbs (Get,Put,Post,Delete) then Http verbs are not required.
+Instead of that I didn't included those verb names and included Http Verbs.
+9) Didn't created any separate Repository for Code reusability.
+10) Created Mail sending class after creating the new order and new order Id will send to Client, but am getting the error with Smtp, I tried for Maximum.
+
+
+
+** these are the changes made in the code.
