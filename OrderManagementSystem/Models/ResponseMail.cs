@@ -21,7 +21,7 @@ namespace OrderManagementSystem.Models
                 if (entities.Database.Connection.State == ConnectionState.Closed)
                 {
                     entities.Database.Connection.Open();
-
+                }
                     StringBuilder mailBody = new StringBuilder();
                     mailBody.Append("Hello, <br/><br/>");
                     mailBody.Append("The Generated Order id=" + orderId);
@@ -33,7 +33,7 @@ namespace OrderManagementSystem.Models
 
                     SmtpClient mailsender = new SmtpClient();                    
                     mailsender.Send(mailMessage);
-                }
+                
             }
             catch(Exception ex)
             {

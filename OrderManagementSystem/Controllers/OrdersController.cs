@@ -73,7 +73,7 @@ namespace OrderManagementSystem.Controllers
                 }
                 else
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Given id=" + id + " is not the record");
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Given id=" + id + " is not in the record");
                 }
             }
             catch(Exception ex)
