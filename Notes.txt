@@ -1,3 +1,6 @@
+Worked on Asp.Net Web Api for 3 months in 2018 as per client requirement, and used Dapper ORM for DataBase.
+After that I didn't worked on that, and didn't have much skills on Web Api.
+
 1) Used Entity framework (DataBase First Approach).
 2) Didn't included Async and await sir.
 3) Created Trigger for Order table, when new order placed then for that new order it will update as "Placed" because intially the order should be Placed.
